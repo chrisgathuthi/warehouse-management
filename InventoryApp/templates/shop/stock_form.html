@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% block middle %}
+
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="form-row">
+        {{ form.product_name.errors }}
+        <label for="{{ form.product_name.id_for_label }}">Product Name:</label>
+        {{ form.product_name }}
+    </div>
+    <div class="form-row">
+        {{ form.net_weight.errors }}
+        <label for="{{ form.net_weight.id_for_label }}">Net weight:</label>
+        {{ form.net_weight }}
+    </div>
+    <div class="form-row">
+        {{ form.qty.errors }}
+        <label for="{{ form.qty.id_for_label }}">Quantity:</label>
+        {{ form.qty }}
+    </div>
+    <div class="form-row">
+        {{ form.tags.errors }}
+        <label for="{{ form.isle.id_for_label }}">Tags:</label>
+        {{ form.tags }}
+    </div>
+    <div class="form-row">
+        {{ form.isle.errors }}
+        <label for="{{ form.isle.id_for_label }}">Isle:</label>
+        {{ form.isle }}
+    </div>
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+
+{% endblock middle %}

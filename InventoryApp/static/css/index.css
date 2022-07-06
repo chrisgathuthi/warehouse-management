@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+.warraper{
+    margin-left: 10px;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.middle{
+    background-color: papayawhip;
+}

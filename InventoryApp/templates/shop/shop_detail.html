@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+
+{% block title %} <title>Details</title> {% endblock title %}
+    
+
+{% block middle %}
+    <h2>product name: {{shop_detail.product_name}}</h2>
+    <h2>net weight: {{shop_detail.net_weight}}</h2>
+    <h2>quantity: {{shop_detail.qty}}</h2>
+    <h2>date: {{shop_detail.date}}</h2>
+    <h2>isle: {{shop_detail.isle}}</h2>
+    <h2>tags: {{shop_detail.tags}}</h2>
+    <h2>storage: {{shop_detail.storage}}</h2>
+    <h2>shelf life: {{shop_detail.shelf_life}}</h2>
+    <h2>attendant: {{shop_detail.attendant}}</h2>
+    <h2>shop_detail: {{shop_detail.status}}</h2>
+    <h2>docs: {{shop_detail.docs}}</h2>
+{% endblock %}
+    
+    

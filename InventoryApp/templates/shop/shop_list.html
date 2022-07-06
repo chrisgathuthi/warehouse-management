@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Stock listing</title>
+</head>
+<body>
+    <section class="header-section">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Ocean Logistics</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarScroll">
+                <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+    </section>
+
+    <section class="content" style="padding-top: 30px;">
+        <table class="table table-striped table-hover table-bordered border-primary">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">weight (t)</th>
+                  <th scope="col">Quantity / unit </th>
+                  <th scope="col">date</th>
+                  <th scope="col">isle</th>
+                  <th scope="col">tags</th>
+                  <th scope="col">storage</th>
+                  <th scope="col">shelf life</th>
+                  <th scope="col">Expiry</th>
+                  <th scope="col">Attendant</th>
+                  <th scope="col">status</th>
+                  <th scope="col">docs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for shop_list in shop_lists %}
+                <tr id="row" data-href="{% url 'shop:detail-page' shop_list.id %}">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{shop_list.product_name}}</td>
+                    <td>{{shop_list.net_weight}}</td>
+                    <td>{{shop_list.qty}}</td>
+                    <td>{{shop_list.date}}</td>
+                    <td>{{shop_list.isle}}</td>
+                    <td>{{shop_list.tags}}</td>
+                    <td>{{shop_list.storage}}</td>
+                    <td>{{shop_list.shelf_life}}</td>
+                    <td>{{shop_list.exp}}</td>
+                    <td>{{shop_list.attendant}}</td>
+                    <td>{{shop_list.status}}</td>
+                    {% if shop_list.docs %}
+                    <td><p>present</p></td>
+                    {% else %}
+                    <td><p>unavailabe</p></td>
+                    {% endif %}
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            
+        </table>
+    </section>
+    <footer>
+      <div class="pagination justify-content-center">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    </footer>
+
+     <script>
+
+        let id = '{{shop_list.id}}'
+        
+        jQuery(document).ready(function($) {
+        $('*[data-href]').on('click', function() {
+          window.location = $(this).data("href");   
+        });
+    });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>
