@@ -1,20 +1,116 @@
 {% extends "shop/base.html" %}
 
-{% block title %} <title>Details</title> {% endblock title %}
+{% block title %} <title>{{shop_detail.product_name}}</title> {% endblock title %}
     
 
 {% block middle %}
-    <h2>product name: {{shop_detail.product_name}}</h2>
-    <h2>net weight: {{shop_detail.net_weight}}</h2>
-    <h2>quantity: {{shop_detail.qty}}</h2>
-    <h2>date: {{shop_detail.date}}</h2>
-    <h2>isle: {{shop_detail.isle}}</h2>
-    <h2>tags: {{shop_detail.tags}}</h2>
-    <h2>storage: {{shop_detail.storage}}</h2>
-    <h2>shelf life: {{shop_detail.shelf_life}}</h2>
-    <h2>attendant: {{shop_detail.attendant}}</h2>
-    <h2>shop_detail: {{shop_detail.status}}</h2>
-    <h2>docs: {{shop_detail.docs}}</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <Label>Product Name</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.product_name}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Net weight</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.net_weight}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Quantity</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.qty}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Date</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.date}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Isle</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.isle}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Tags</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.tags}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Storage</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.storage}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Shelf Life</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.shelf_life}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Handler</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.attendant}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Status</Label>
+        </div>
+        <div class="col-6">
+            {{shop_detail.status}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <Label>Document</Label>
+        </div>
+        {% if shop_detail.docs.url %}
+        <div class="col-6">
+            <a href="{{shop_detail.docs.url}}">Download</a>
+        </div>
+        {% else %}
+        <div class="col-6">
+            <h3>No docs</h3>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
 {% endblock %}
     
     

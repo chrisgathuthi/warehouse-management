@@ -8,14 +8,12 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView,DetailView,ListView
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
-
-from requests import Response, request
 from .models import Stock
 from .forms import StockForm
 # Create your views here.
 
 
-#@method_decorator(login_required,name="dispatch")
+@method_decorator(login_required,name="dispatch")
 class IndexView(TemplateView):
     template_name = "index.html"
 
@@ -38,7 +36,8 @@ class StockCreate(LoginRequiredMixin,CreateView):
     model = Stock
     form_class = StockForm
     template_name = "shop/stock_form.html"
-    success_url = "/stock-list-page/"
+    success_url = reverse_lazy("shop:detail-page")
+    
     
 
     def get_initial(self) -> Dict:

@@ -1,35 +1,49 @@
 {% extends "shop/base.html" %}
 {% block middle %}
 
+<div class="container">
 <form action="." method="post">
+    
+    {% if messages %}
+    {% for message in messages %}
+        <div class="text-center alert alert-{{ message.tags }}">
+            {{ message|safe }}
+        </div>
+    {% endfor %}
+    {% endif %}
+    
     {% csrf_token %}
     {{ form.non_field_errors }}
-    <div class="form-row">
+    <div class="form-group col-md-6 mb-3">
         {{ form.product_name.errors }}
         <label for="{{ form.product_name.id_for_label }}">Product Name:</label>
-        {{ form.product_name }}
+        <div class="row">{{ form.product_name }}</div>
     </div>
-    <div class="form-row">
+
+    <div class="form-group col-md-6 mb-3">
         {{ form.net_weight.errors }}
         <label for="{{ form.net_weight.id_for_label }}">Net weight:</label>
-        {{ form.net_weight }}
+        <div class="row">{{ form.net_weight }}</div>
     </div>
-    <div class="form-row">
+
+    <div class="form-group col-md-6 mb-3">
         {{ form.qty.errors }}
         <label for="{{ form.qty.id_for_label }}">Quantity:</label>
-        {{ form.qty }}
+        <div class="row">{{ form.qty }}</div>
     </div>
-    <div class="form-row">
+
+    <div class="form-group col-md-6 mb-3">
         {{ form.tags.errors }}
         <label for="{{ form.isle.id_for_label }}">Tags:</label>
-        {{ form.tags }}
+        <div class="row">{{ form.tags }}</div>
     </div>
-    <div class="form-row">
+
+    <div class="form-group col-md-6 mb-3">
         {{ form.isle.errors }}
         <label for="{{ form.isle.id_for_label }}">Isle:</label>
-        {{ form.isle }}
+        <div class="row">{{ form.isle }}</div>
     </div>
-    <button type="submit" class="btn btn-primary">submit</button>
+    <button type="submit" class="btn btn-primary mb-3">submit</button>
 </form>
-
+</div>
 {% endblock middle %}

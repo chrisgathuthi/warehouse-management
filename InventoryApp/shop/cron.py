@@ -5,6 +5,7 @@ def check_status():
     for qs in obj:
         if qs.exp <= date.today():
             qs.status= "Expired"
+            qs.save()
     return None
 
     

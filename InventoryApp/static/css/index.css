@@ -10,6 +10,21 @@
     display: flex;
     justify-content: space-between;
 }
-.middle{
-    background-color: papayawhip;
+h2{
+   
+    color: #3452eb;
+}
+h2 span{
+    color: #34ebb7;
+   
+}
+
+.logo{
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+}
+.warraper img{
+    background-image: url(static\img\ivan-bandura-5cwigXmGWTo-unsplash.jpg);
+    background-repeat: no-repeat;
+    position: relative;
 }
