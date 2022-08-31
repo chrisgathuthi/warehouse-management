@@ -1,116 +1,92 @@
-{% extends "shop/base.html" %}
-
-{% block title %} <title>{{shop_detail.product_name}}</title> {% endblock title %}
-    
-
-{% block middle %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <Label>Product Name</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.product_name}}
-        </div>
+{% extends "shop/base.html" %} {% block title %}
+{% endblock title %}<title>{{shop_detail.product_name}}</title>
+{% block main%}
+<div class="container-fluid" hx-swap="outerHTML" hx-target="#container-fluid"  id="container-fluid">
+  <div class="row">
+    <div class="col">
+      <label>Product Name</label>
     </div>
+    <div class="col-6">{{shop_detail.product_name}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Net weight</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.net_weight}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Net weight</label>
     </div>
+    <div class="col-6">{{shop_detail.net_weight}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Quantity</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.qty}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Quantity</label>
     </div>
+    <div class="col-6">{{shop_detail.qty}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Date</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.date}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Date</label>
     </div>
+    <div class="col-6">{{shop_detail.date}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Isle</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.isle}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Isle</label>
     </div>
+    <div class="col-6">{{shop_detail.isle}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Tags</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.tags}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Tags</label>
     </div>
+    <div class="col-6">{{shop_detail.tags}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Storage</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.storage}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Storage</label>
     </div>
+    <div class="col-6">{{shop_detail.storage}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Shelf Life</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.shelf_life}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Shelf Life</label>
     </div>
+    <div class="col-6">{{shop_detail.shelf_life}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Handler</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.attendant}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Handler</label>
     </div>
+    <div class="col-6">{{shop_detail.attendant}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Status</Label>
-        </div>
-        <div class="col-6">
-            {{shop_detail.status}}
-        </div>
+  <div class="row">
+    <div class="col">
+      <label>Status</label>
     </div>
+    <div class="col-6">{{shop_detail.status}}</div>
+  </div>
 
-    <div class="row">
-        <div class="col">
-            <Label>Document</Label>
-        </div>
-        {% if shop_detail.docs.url %}
-        <div class="col-6">
-            <a href="{{shop_detail.docs.url}}">Download</a>
-        </div>
-        {% else %}
-        <div class="col-6">
-            <h3>No docs</h3>
-        </div>
-        {% endif %}
-
+  <div class="row">
+    <div class="col">
+      <label>Document</label>
     </div>
+    {% if shop_detail.docs.url %}
+    <div class="col-6">
+      <a href="{{shop_detail.docs.url}}">Download</a>
+    </div>
+    {% else %}
+    <div class="col-6">
+      <h3>No docs</h3>
+    </div>
+    {% endif %}
+  </div>
+  <button hx-get="{% url 'shop:update-page' shop_detail.id %}" class="btn btn-primary">click to edit</button>
 </div>
-{% endblock %}
-    
-    
+{% endblock main %} 
+

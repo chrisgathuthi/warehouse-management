@@ -1,8 +1,8 @@
-{% extends "shop/base.html" %}
-{% block middle %}
+
+{% block main %}
 
 <div class="container" >
-<form action="." method="post">
+<form hx-put="{% url 'update-page'  %}" action="." method="post">
     {% if messages %}
     {% for message in messages %}
         <div class="text-center alert alert-{{ message.tags }}">
@@ -45,4 +45,4 @@
     <button type="submit" class="btn btn-primary mb-3">submit</button>
 </form>
 </div>
-{% endblock middle %}
+{% endblock main %}
