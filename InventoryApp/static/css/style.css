@@ -67,14 +67,18 @@
 .contents .main .indicator span{
     margin: 5px auto;
     padding: 2px;
-    height: 10vh;
+    height: 5vh;
     display: inline-flex;
 }
 .contents .main .search{
     margin: 5px auto;
     padding: 2px;
     height: 10vh;
+    width: 100%;
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: red; */
 }
 .contents .main .search form label{
     height: 8px;
@@ -87,4 +91,9 @@
     border-radius: 10px;
     color: #000000;
     border: none;
+    width: 400px;
+}
+.contents .main .search form input::placeholder{
+    text-align: center;
+    font-weight: 600;
 }
