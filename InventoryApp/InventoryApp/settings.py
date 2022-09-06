@@ -155,3 +155,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRONJOBS = [
     ('*/5 * * * *', 'shop.cron.check_status')
 ]
+
+LOGIN_URL = "/login/"

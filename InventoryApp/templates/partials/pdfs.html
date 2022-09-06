@@ -1,0 +1,48 @@
+
+{% extends "shop/base.html" %}
+
+
+{% block main %}
+
+{% if obj  %}
+<style>
+    thead,tbody{
+        width: 100%;
+    }
+    td{
+        margin: auto;
+        text-align: left;
+        text-decoration: none;
+        width: 200px;
+    }
+</style>
+<table>
+    <thead>
+        <tr>
+            <td>#</td>
+            <td>product Name</td>
+            <td>document link</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for items in obj %}
+
+        <tr>
+            <td style="width: 10px; padding-left: 0;">{{forloop.counter}}</td>
+            <td style="width: 10px;">{{items.product_name}}</td>
+            {% if items.docs %}
+            <td> <a href="{{items.docs.url}}">Download</a> </td>
+            {% else %}
+            <td>No doc</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+
+{% endblock main %}
+

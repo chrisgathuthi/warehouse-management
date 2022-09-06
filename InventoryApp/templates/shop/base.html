@@ -15,17 +15,35 @@
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}" />
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}" />
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="manifest" href="{% static 'img/site.webmanifest' %}" />
-  {% block title %} {% endblock title %}
 </head>
 
+
 <body  hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <style>
+    h2{
+      font-size: 25px;
+      font-weight: 600;
+      color: #000000;
+      margin: auto 20px;
+    }
+    h2 span{
+      color: goldenrod;
+    }
+    h3{
+      margin: auto 10px;
+    }
+
+  </style>
   <section>
     <div class="status-bar">
-      <img src="{% static 'img/favicon-32x32.png' %}" alt="logged-user">
-      <h3>Position:office manager</h3>
-      <h3>Time:time-function</h3>
-      <a href="#">logout</a>
+      <h2>Atlantic <span>Logistics</span></h2>
+      {% if request.user.is_authenticated %}
+      <h3 >{{request.user.username}}</h3>
+      {% endif %}
+      {% include "partials/timer-tag.html" %}
+      <a href="% url 'shop:logout-page' %}"> <i class="fa fa-sign-out"></i> logout</a>
   </section>
   <section>
     <div class="contents">

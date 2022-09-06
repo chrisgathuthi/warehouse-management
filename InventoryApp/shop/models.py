@@ -39,7 +39,13 @@ class Stock(models.Model):
     exp = models.DateField(verbose_name="Expiry date",null=True)
     attendant = models.ForeignKey(to=User,related_name="handler",on_delete = models.CASCADE,verbose_name="handler",default=1)
     status = models.CharField(verbose_name="comment",max_length=25,null=True)
-    docs = models.FileField(upload_to="documents",verbose_name="documentation",null=True,max_length=100)
+    docs = models.FileField(upload_to="documents/",verbose_name="documentation",null=True,max_length=100)
+
+    @property
+    def Url(self):
+        if self.docs == "":
+            self.docs= ""
+        return self.docs
 
     def __str__(self) -> str:
         return f"{self.product_name}"
@@ -51,21 +57,33 @@ class Stock(models.Model):
     @staticmethod
     def get_date():
         return datetime.today()
-
-
+    
     class Meta:
         permissions =[
             ("can_allow_dispatch", "can allow dispatch"),
             ("can_make_reorders", "can make new orders"),
         ]
-        ordering = ["-product_name","-date"]
+        ordering = ["product_name","-date"]
     
     def get_absolute_url(self):
         return reverse("shop:detail-page",kwargs={"pk":self.pk})
 
-
+class Sales(models.Model):
+    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name="seller",verbose_name="attendant",)
+    stock_sold = models.ForeignKey(Stock,on_delete=models.CASCADE,related_name="item",verbose_name="Stock sold",)
+    stock_qty = models.PositiveIntegerField(verbose_name="quantity sold")
+    date = models.DateTimeField(auto_now_add=True)
 
     
+
+    def __str__(self) -> str:
+        return f"{self.stock_sold}"
+
+    class Meta:
+        permissions =[
+            ("can_allow_dispatch", "can allow dispatch"),
+        ]
+        ordering = ["-date"]
 
 
 

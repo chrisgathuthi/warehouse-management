@@ -1,1 +1,76 @@
-{% if q_results %}
+
+{% load static %}
+
+
+<table>
+    <style>
+        table{
+            width: 100%;
+            border: 2px solid #fff;
+        }
+        thead{
+            width: 100%;
+            height: 8vh;
+            border: 1px dotted pink;
+        }
+        thead tr td{
+            width: 200px;
+            height: 20px;
+            text-align: left;
+        }
+        tbody tr{
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            margin: auto;
+        }
+        tbody tr td{
+            width: 200px;
+            height: 20px;
+            text-align: left;
+        }
+
+    </style>
+    <thead>
+        <tr>
+            <td>Product Name</td>
+            <td>Net weight</td>
+            <td>Quantity</td>
+            <td>Date</td>
+            <td>Isle</td>
+            <td>Tags</td>
+            <td>Isle</td>
+            <td>Tags</td>
+            <td>Storage</td>
+            <td>Shelf Life</td>
+            <td>Expirary</td>
+            <td>Attendant</td>
+            <td>Status</td>
+            <td>Docs</td>
+        </tr>
+    </thead>
+    {% if q_results %}
+    {% for q_result in q_results %}
+    <tr>
+        <td>{{q_result.product_name}}</td>
+        <td>{{q_result.net_weight}}</td>
+        <td>{{q_result.qty}}</td>
+        <td>{{q_result.date}}</td>
+        <td>{{q_result.isle}}</td>
+        <td>{{q_result.tags}}</td>
+        <td>{{q_result.storage}}</td>
+        <td>{{q_result.shelf_life}}</td>
+        <td>{{q_result.attendant}}</td>
+        <td>{{q_result.status}}</td>
+        {% if q_result.docs.url %}
+        <td><a href="{{q_result.docs.url}}">Download</a></td>
+        {% else %}
+        <td><p>Noe docs</p></td>
+        {% endif %}
+        {% endfor %}
+    </tr>
+</table>
+{% else %}
+<p>No results</p>
+{% endif %}
