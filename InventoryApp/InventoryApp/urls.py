@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("shop.urls",namespace="shop"),name="shop"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('__debug__/', include('debug_toolbar.urls'))
+    path('__debug__/', include('debug_toolbar.urls')),
+    path('api/', include('api.urls')),
 ]
 if settings.DEBUG:
     urlpatterns + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

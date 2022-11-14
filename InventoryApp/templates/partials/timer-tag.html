@@ -1,1 +1,1 @@
-<h3 hx-get="{% url 'shop:base-html' %}" hx-trigger="every 1"   hx-swap="outerHTML" >Time | {{timer}} |</h3>
+<h3>Time | {% now "D M Y H T " %} |</h3>
