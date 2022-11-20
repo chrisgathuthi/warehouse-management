@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.authtoken.views import obtain_auth_token
 from . import views
 urlpatterns = [
     path("create_stock/",views.StockCreateView.as_view(),name="create-stock-api"),
@@ -8,6 +9,7 @@ urlpatterns = [
     path("delete_stock/<int:pk>/",views.StockDeleteView.as_view(),name="delete-stock-api"),
     path("user/",views.UserListView.as_view(),name="user-list-api"),
     path("user/<int:pk>/",views.UserDetailView.as_view(),name="user-get-api"),
+    path("auth/",obtain_auth_token),
     
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

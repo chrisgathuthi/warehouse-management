@@ -2,7 +2,8 @@
 from rest_framework import generics, permissions, authentication
 from .serializers import StockSerializer, UserSerializer
 from shop.models import Stock
-
+from .permissions import IsStaffEditorPermissions
+from api.authentication import TokenAuthentication
 # Create your views here.
 class StockCreateView(generics.CreateAPIView):
 
@@ -10,11 +11,12 @@ class StockCreateView(generics.CreateAPIView):
 
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    authentication_classes = [authentication.SessionAuthentication,TokenAuthentication]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
 
     def perform_create(self,serializer):
-        serializer.save(attendant = self.request.user)
+        status = serializer.validated_data.get("status","pending")
+        serializer.save(attendant = self.request.user, status = status)
 
 
 
@@ -24,7 +26,7 @@ class StockListView(generics.ListAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     authentication_classes = [authentication.SessionAuthentication]
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.DjangoModelPermissions]
 
 class StockUpdateView(generics.UpdateAPIView):
     """stock update api"""
