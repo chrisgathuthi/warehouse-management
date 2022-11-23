@@ -12,19 +12,36 @@ class StockCreateView(generics.CreateAPIView):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
     authentication_classes = [authentication.SessionAuthentication,TokenAuthentication]
-    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self,serializer):
-        status = serializer.validated_data.get("status","pending")
-        serializer.save(attendant = self.request.user, status = status)
+        serializer.status = serializer.validated_data.get("status","pending")
+        serializer.save(attendant = self.request.user, status =serializer.status)
 
 
 
-class StockListView(generics.ListAPIView):
+class StockListView(generics.ListCreateAPIView):
     """list all stock api"""       
 
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.DjangoModelPermissions]
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset()
+        user = self.request.user
+        if not user.is_authenticated:
+            return Stock.objects.none()
+        return qs.filter(attendant=user)
+
+
+class StockRetrieveView(generics.RetrieveAPIView):
+    """get stock api"""       
+
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
+    lookup_field = "pk"
     authentication_classes = [authentication.SessionAuthentication]
     permission_classes = [permissions.DjangoModelPermissions]
 
