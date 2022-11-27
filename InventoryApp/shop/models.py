@@ -71,8 +71,8 @@ class Stock(models.Model):
         return reverse("shop:detail-page",kwargs={"pk":self.pk})
 
 class Sales(models.Model):
-    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name="seller",verbose_name="attendant",)
-    stock_sold = models.ForeignKey(Stock,on_delete=models.CASCADE,related_name="item",verbose_name="Stock sold",)
+    employee = models.ForeignKey(User,on_delete=models.CASCADE,related_name="seller",verbose_name="attendant")
+    stock_sold = models.ForeignKey(Stock,on_delete=models.CASCADE,related_name="item",verbose_name="Stock sold")
     stock_qty = models.PositiveIntegerField(verbose_name="quantity sold")
     date = models.DateTimeField(auto_now_add=True)
 

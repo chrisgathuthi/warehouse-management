@@ -2,10 +2,16 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 from rest_framework.reverse import reverse
-from shop.models import Stock
+from shop.models import Stock, Sales
 
+
+class SalesSerializer(serializers.ModelSerializer):
+    item = serializers.PrimaryKeyRelatedField(many=True, read_only= True)
+    class Meta:
+        model = Sales
+        fields = ["item","employee", "stock_sold","stock_qty","date"]
 class UserSerializer(serializers.ModelSerializer):
-    stock = serializers.PrimaryKeyRelatedField(many=True,queryset=Stock.objects.all())
+    stock = serializers.PrimaryKeyRelatedField(many=False,queryset=Stock.objects.all())
     class Meta:
         model = User
         fields = ["id", "username", "stock"]
@@ -13,13 +19,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 class StockSerializer(serializers.ModelSerializer):
     attendant = serializers.ReadOnlyField(source = "attendant.username")
-    url = serializers.HyperlinkedIdentityField(view_name="stock-retrieve-api", lookup_field="pk")#for reverse url
+    item = serializers.HyperlinkedRelatedField(many=True,read_only=True,view_name="sales-detail")
     #email = serializers.EmailField(write_only=True)
     class Meta:
         model = Stock
         fields = ["product_name", 
+            "item",
             "pk",
-            "url",
             #"email",
             "attendant",
             "net_weight",
@@ -46,8 +52,8 @@ class StockSerializer(serializers.ModelSerializer):
 
         
 
-    def get_url(self,obj):
-        request = self.context.get("request")#many serializers don't have request
-        if request is None:
-            return None
-        return reverse("stock-retrieve-api",kwargs={"obj":obj.pk},request=request)
+    # def get_url(self,obj):
+    #     request = self.context.get("request")#many serializers don't have request
+    #     if request is None:
+    #         return None
+    #     return reverse("stock-retrieve-api",kwargs={"obj":obj.pk},request=request)

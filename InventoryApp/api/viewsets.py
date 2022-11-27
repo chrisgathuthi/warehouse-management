@@ -1,6 +1,6 @@
 from rest_framework import viewsets, mixins
-from shop.models import Stock
-from .serializers import StockSerializer
+from shop.models import Stock, Sales
+from .serializers import StockSerializer, SalesSerializer
 
 
 class StockViewSet(viewsets.ModelViewSet):
@@ -24,3 +24,8 @@ class StockGenericViewset(
 
 #stock_retreive_views = StockGenericViewset.as_view({"get":"retreive"})
 #stock_list_views = StockGenericViewset.as_view({"get":"list"})
+
+class SalesViewSet(viewsets.ModelViewSet):
+    queryset = Sales.objects.all()
+    serializer_class = SalesSerializer
+    lookup_field = "pk"
