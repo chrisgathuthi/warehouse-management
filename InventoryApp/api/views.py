@@ -4,6 +4,7 @@ from .serializers import StockSerializer, UserSerializer
 from shop.models import Stock
 from .permissions import IsStaffEditorPermissions
 from api.authentication import TokenAuthentication
+import datetime
 # Create your views here.
 class StockCreateView(generics.CreateAPIView):
 
@@ -15,8 +16,8 @@ class StockCreateView(generics.CreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self,serializer):
-        serializer.status = serializer.validated_data.get("status","pending")
-        serializer.save(attendant = self.request.user, status =serializer.status)
+        serializer.shelf_life = datetime.timedelta(days=10,hours=10,minutes=50)
+        serializer.save(attendant = self.request.user, shelf_life =serializer.shelf_life)
 
 
 
