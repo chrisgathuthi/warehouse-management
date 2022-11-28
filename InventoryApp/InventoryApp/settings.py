@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import datetime
 from pathlib import Path
 import os
 
@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,6 +58,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'InventoryApp.urls'
+CORS_URLS_REGEX = r"^/api/.*"
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
 
 # INTERNAL_IPS = [
 #     # ...
@@ -168,10 +175,16 @@ LOGIN_URL = "/login/"
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES":[
         "rest_framework.authentication.SessionAuthentication",
-        "api.authentication.TokenAuthentication"
+        "api.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES":[
         "rest_framework.permissions.IsAuthenticatedOrReadOnly" 
 
     ]
+}
+SIMPLE_JWT ={
+    "AUTH_HEADER_TYPES":["Bearer"],
+    "ACCESS_TOKE_LIFETIME":datetime.timedelta(seconds=30),#minuetes 1
+    "ACCESS_TOKE_LIFETIME":datetime.timedelta(minutes =1),#day = 1
 }
