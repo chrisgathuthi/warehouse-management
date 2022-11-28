@@ -59,16 +59,3 @@ class StockDeleteView(generics.DestroyAPIView):
     serializer_class = StockSerializer
 
 
-class UserListView(generics.ListAPIView):
-
-    """user list api """
-
-    queryset = Stock.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetailView(generics.RetrieveAPIView):
-
-    """user detail api"""
-
-    queryset = Stock.objects.all()
-    serializer_class = UserSerializer
